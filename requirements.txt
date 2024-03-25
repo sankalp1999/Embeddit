@@ -1,0 +1,5 @@
+Flask==3.0.2
+lancedb==0.6.4
+numpy==1.26.4
+open_clip_torch
+pandas==2.2.1
