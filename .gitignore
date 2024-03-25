@@ -1,4 +1,7 @@
 .DS_Store
 data
-images
+
+images/*
 venv
+# But keep the images directory itself
+!images/.gitkeep

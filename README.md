@@ -1,6 +1,8 @@
 # Embeddit: Image Embedding and Search
 
-Embeddit is a Python-based single page app that allows you to search for images using text queries or by uploading an image (image to image search). It uses the OpenAI [CLIP ](https://github.com/openai/CLIP) for embedding images and stores in the vectors in [lanceDB](https://github.com/lancedb/lancedb).
+Embeddit is a Python/flask app that allows you to search for images using text queries or by uploading an image (image to image search). It uses the OpenAI [CLIP](https://github.com/openai/CLIP) for embedding images and stores in the vectors in [lanceDB](https://github.com/lancedb/lancedb).
+
+![v1 demo](static/project.gif)
 
 ## Table of Contents
 
@@ -36,7 +38,7 @@ Embeddit is a Python-based single page app that allows you to search for images 
 
 Before setting up Embeddit, ensure that you have the following prerequisites installed:
 
-- Python 3.7 or higher
+- Python 3.8 or higher
 
 - pip (Python package installer)
 
@@ -79,11 +81,7 @@ Before setting up Embeddit, ensure that you have the following prerequisites ins
 
   ```
 
-    Once activated, your terminal prompt will indicate that you are working within the virtual environment.
-
-
-
-3. pip install the dependencies
+3. Install necessary dependencies. I try to keep them at minimum.
 
     ```
 
@@ -91,7 +89,7 @@ Before setting up Embeddit, ensure that you have the following prerequisites ins
 
     ```
 
-    This will install all the necessary packages specified in the requirements.txt file.
+    
 
 ## Usage
 
@@ -99,11 +97,10 @@ To run the Embeddit application, follow these steps:
 
 1. Ensure that you have activated the virtual environment.
 
-2. Navigate to the project directory.
+2. Place the images you want to index and search in the designated image folder (default: `images/` folder).
 
-3. Place the images you want to index and search in the designated image folder (default: images).
+3. Run the following command to start the application:
 
-4. Run the following command to start the application:
 
    ```
 
@@ -111,11 +108,11 @@ To run the Embeddit application, follow these steps:
 
    ```
 
-   Replace path/to/your/image/folder with the actual path to the folder containing your images.
+   Replace path/to/your/image/folder with the actual path to the folder containing your images. By default, uses `images/` folder in the project directory.
 
-5. Open a web browser and visit http://localhost:5000 to access the Embeddit web interface.
+4. Open a web browser and visit http://localhost:5000 to access the Embeddit web interface.
 
-6. Use the search bar to enter text queries or upload an image to find visually similar images.
+5. Use the search bar to enter **text queries** or **upload an image** to find visually similar images.
 
 ## License
 
