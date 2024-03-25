@@ -1,4 +1,4 @@
-# Embeddit: Image Embedding and Search
+# Embeddit: Image Search Using CLIP and LanceDB
 
 Embeddit is a Python/flask app that allows you to search for images using text queries or by uploading an image (image to image search). It uses the OpenAI [CLIP](https://github.com/openai/CLIP) for embedding images and stores in the vectors in [lanceDB](https://github.com/lancedb/lancedb).
 
