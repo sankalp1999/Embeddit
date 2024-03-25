@@ -42,15 +42,14 @@ Before setting up Embeddit, ensure that you have the following prerequisites ins
 
 ## Setup
 
-### Setting up a Python Virtual Environment
 
-To create a virtual environment for Embeddit, follow these steps:
+1. navigate to the project folder
 
-1. Open a terminal or command prompt.
+   ```
+   cd Embeddit
+   ```
 
-2. Navigate to the directory where you want to create the virtual environment.
-
-3. Run the following command to create a new virtual environment:
+   create the virtual environment.
 
    ```
 
@@ -60,9 +59,9 @@ To create a virtual environment for Embeddit, follow these steps:
 
    This will create a new virtual environment named embeddit_env.
 
-### Activating the Virtual Environment
 
-To activate the virtual environment, run the appropriate command based on your operating system:
+
+2. To activate the virtual environment, run the appropriate command based on your operating system:
 
 - For Windows:
 
@@ -80,19 +79,19 @@ To activate the virtual environment, run the appropriate command based on your o
 
   ```
 
-Once activated, your terminal prompt will indicate that you are working within the virtual environment.
+    Once activated, your terminal prompt will indicate that you are working within the virtual environment.
 
-### Installing Dependencies
 
-With the virtual environment activated, navigate to the project directory and install the required dependencies by running the following command:
 
-```
+3. pip install the dependencies
 
-pip install -r requirements.txt
+    ```
 
-```
+    pip install -r requirements.txt
 
-This will install all the necessary packages specified in the requirements.txt file.
+    ```
+
+    This will install all the necessary packages specified in the requirements.txt file.
 
 ## Usage
 
