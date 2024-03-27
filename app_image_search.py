@@ -30,7 +30,8 @@ class Media(LanceModel):
     def image(self):
         return Image.open(self.image_uri)
 
-db = lancedb.connect(f"data/{args.image_folder}")
+
+db = lancedb.connect(f"database")
 
 def is_valid_file(file_path):
     """
@@ -70,20 +71,34 @@ def is_valid_file(file_path):
     return True
 
 
-if "media" in db:
-    print('exists already')
-    table = db["media"]
+def get_valid_table_name(folder_path):
+    # Remove any special characters and replace them with underscores
+    table_name = re.sub(r'[^a-zA-Z0-9]', '_', folder_path)
+    # Remove leading and trailing underscores
+    table_name = table_name.strip('_')
+    return table_name
+
+image_folder_path = args.image_folder
+table_name = get_valid_table_name(image_folder_path)
+
+if table_name in db:
+    print("--------")
+    print(f'Table {table_name} exists already. If you want to create a new table with same name, please delete this table from database/folder_name')
+    print("--------")
+    table = db[table_name]
 else:
     try:
-        table = db.create_table("media", schema=Media, mode="overwrite")
-        p = Path(args.image_folder).expanduser()
+        print("Creating new table...")
+        table = db.create_table(table_name, schema=Media, mode="overwrite")
+        
+        p = Path(image_folder_path).expanduser()
         uris = [str(f.absolute()) for f in p.iterdir() if is_valid_file(f)]
         
         table.add(pd.DataFrame({"image_uri": uris}))
     except Exception as e:
         print('here')
-        if "media" in db:
-            db.drop_table("media")
+        if image_folder_path in db:
+            db.drop_table(table_name)
         raise e
 
 @app.route('/', methods=['POST', 'GET'])
@@ -108,7 +123,7 @@ def image_search():
 @app.route('/images/<path:filename>')
 def serve_image(filename):
     # mention the folder name here
-    return send_from_directory(args.image_folder, filename)
+    return send_from_directory(image_folder_path, filename)
 
 if __name__ == '__main__':
     app.run()
