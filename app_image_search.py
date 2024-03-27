@@ -83,7 +83,7 @@ table_name = get_valid_table_name(image_folder_path)
 
 if table_name in db:
     print("--------")
-    print(f'Table {table_name} exists already. If you want to create a new table with same name, please delete this table from database/folder_name')
+    print(f'Table {table_name} exists already. If you want to create a new table with same name, please rename your folder or delete existing table from database/folder_name.lance')
     print("--------")
     table = db[table_name]
 else:
