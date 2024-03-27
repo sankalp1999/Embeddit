@@ -9,7 +9,7 @@ import pandas as pd
 from itertools import chain
 import re, os
 import argparse
-
+import urllib.parse
 
 parser = argparse.ArgumentParser(description='Image search application')
 parser.add_argument('--image-folder', type=str, default='images', help='Path to the folder containing the images')
@@ -107,6 +107,7 @@ def image_search():
     if request.method == 'POST':
         search_query = request.form.get('search')
         query_image = request.files.get('image')
+        image_url = request.form.get('image_url')
         
         if search_query:
             # Perform text-based image search
@@ -115,6 +116,13 @@ def image_search():
         elif query_image:
             # Perform image-based search
             query_image = Image.open(query_image)
+            rs = table.search(query_image).limit(40).to_pydantic(Media)
+            results = [{'image_uri': item.image_uri} for item in rs]
+        elif image_url:
+            # Perform image-based search using the URL
+            image_path = image_url.replace(request.host_url + 'images/', '')
+            decoded_image_path = urllib.parse.unquote(image_path)
+            query_image = Image.open(os.path.join(image_folder_path, decoded_image_path))
             rs = table.search(query_image).limit(40).to_pydantic(Media)
             results = [{'image_uri': item.image_uri} for item in rs]
 
@@ -126,4 +134,4 @@ def serve_image(filename):
     return send_from_directory(image_folder_path, filename)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5001)
